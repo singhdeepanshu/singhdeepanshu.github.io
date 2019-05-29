@@ -3,7 +3,7 @@
 								<div class="modal-body">
 									<div class="modal-content">
 										<div class="modal-header text-center">
-											<h4 class="modal-title" id="myModalLabel">Register</h4>
+											<h4 class="modal-title" id="myModalLabel">Registration</h4>
 											<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 										</div>
 										<div class="modal-body">
@@ -35,10 +35,10 @@
 												</div>	
 												<div class="form-group">
 													<label for="phone">Phone</label>
-													<input type="text" pattern="[0-9]{10}" class="form-control" name="phone" id="phone" placeholder="Mobile">
+													<input type="text" onkeyup="this.pattern='[0-9]{10}'" class="form-control" maxlength="10" name="phone" id="phone" placeholder="Mobile">
 												</div>	
 														
-												<button type="submit" name="user-register" class="btn btn-primary">Register</button>
+												<button type="submit" name="user-register" class="button button-circle button-border button-amber button-block">Register</button>
 											</form>
 										</div>
 									</div>

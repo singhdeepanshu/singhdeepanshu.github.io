@@ -1,4 +1,54 @@
 <?php
+if(isset($_POST['subscribe-form']))
+{
+	require 'phpmailer/src/Exception.php';
+  require 'phpmailer/src/PHPMailer.php';
+  require 'phpmailer/src/SMTP.php';
+  $email = filter_var(trim($_POST["widget-subscribe-form-email"]), FILTER_SANITIZE_EMAIL);
+  if (  !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+	    http_response_code(400);
+        echo '<p class="alert alert-warning">Please complete the form and try again.</p>';
+        exit;
+     }
+	 $mail = new PHPMailer\PHPMailer\PHPMailer();
+				// Passing `true` enables exceptions
+                                                          //Server settings
+			$mail->SMTPDebug = 2;                                 // Enable verbose debug output
+			$mail->isSMTP();                                      // Set mailer to use SMTP
+			$mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
+			$mail->SMTPAuth = true;                               // Enable SMTP authentication
+			$mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+			$mail->Port = 587;                                    // TCP port to connect to
+			//$mail->SMTPAutoTLS = false;
+	
+			$mail->Username = 'skalskaa77@gmail.com';       // SMTP username .. This id should be login into device otherwise authentication failed msg 
+			$mail->Password = 'qwertyuiop987654321';                     // SMTP password
+    
+
+			$mail->setFrom("singh.deepanshu207@gmail.com","Spritual Events");                                  // Sender mail id and name
+			$mail->addAddress($email);     // Add a recipient email-id and password
+                                                                
+
+			$mail->isHTML(true);                                  // Set email format to HTML
+			$mail->Subject = 'Subscription mail';
+			$mail->Body    = "Thank you ".$email." for subscribing with spiritiual Events. <br>We will send you notifications for the upcoming events taking place";
+			$mail->AltBody = 'Reply asap!!!!';
+
+			if(!$mail->send())
+			{
+			http_response_code(500);
+			}
+			else{
+				http_response_code(200);
+				$data['success']=true;
+				header('Location:index.php');
+			}
+         
+
+        
+	
+}	
+ 
 session_start();
 
 	require_once('./dbConfig.php');
@@ -7,7 +57,7 @@ session_start();
 	$events = array();
 	$sql = "select * from `events_list`";
 	$result = $mysqli_conn->get($sql);
-
+     
 	if($result->num_rows > 0) {
 	 $row_count = mysqli_num_rows($result);
 		while($row = mysqli_fetch_assoc($result)){
@@ -18,13 +68,20 @@ session_start();
    if(isset($_POST['user-register']))
    {
 	   $array = array();   
-      
+      function random()
+	  { $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+        $result = '';
+        for ($i = 0; $i < 6; $i++)
+          $result .= $characters[mt_rand(0, 61)];
+	    return $result;
+	  }
       $array['name'] = mysqli_real_escape_string($mysqli_conn->conn, $_REQUEST['name']);
       $array['email'] =  mysqli_real_escape_string($mysqli_conn->conn, $_REQUEST['email']);
       $array['address'] =  mysqli_real_escape_string($mysqli_conn->conn, $_REQUEST['address']);
       $array['dob'] =  mysqli_real_escape_string($mysqli_conn->conn, $_REQUEST['dob']);
       $array['phone'] =  mysqli_real_escape_string($mysqli_conn->conn, $_REQUEST['phone']);
       $array['birthplace'] =  mysqli_real_escape_string($mysqli_conn->conn, $_REQUEST['birthplace']);
+	  $array['refercode']=random();
 		foreach( array_keys($array) as $key ) {
           $fields[] = "`$key`";
           $values[] = "'" . $array[$key] . "'";
@@ -59,7 +116,7 @@ session_start();
 	<link rel="stylesheet" href="css/animate.css" type="text/css" />
 	<link rel="stylesheet" href="css/magnific-popup.css" type="text/css" />
 	<link rel="stylesheet" href="css/calendar.css" type="text/css" />
-
+	<link rel="shortcut icon" href="images/favicon.png" />
 	<link rel="stylesheet" href="css/responsive.css" type="text/css" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<link rel="stylesheet" href="css/colors.php" type="text/css" />
@@ -86,7 +143,7 @@ session_start();
 				<div class="container clearfix vertical-middle" style="z-index: 3;">
 
 					<div class="heading-block title-center nobottomborder">
-						<h1>Welcome Text</h1>
+						<h1>Welcome To Spiritual Events</h1>
 					</div>
 
 				</div>
@@ -108,7 +165,7 @@ session_start();
 							<div class="fbox-icon">
 								<a href="#"><i class="icon-calendar i-alt"></i></a>
 							</div>
-							<h3>Interactive Sessions<span class="subtitle">Lorem ipsum dolor sit</span></h3>
+							<h3>Interactive Sessions<span class="subtitle"></span></h3>
 						</div>
 					</div>
 
@@ -117,7 +174,7 @@ session_start();
 							<div class="fbox-icon">
 								<a href="#"><i class="icon-map i-alt"></i></a>
 							</div>
-							<h3>Great Locations<span class="subtitle">Officia ipsam laudantium</span></h3>
+							<h3>Great Locations<span class="subtitle"></span></h3>
 						</div>
 					</div>
 
@@ -126,7 +183,7 @@ session_start();
 							<div class="fbox-icon">
 								<a href="#"><i class="icon-microphone2 i-alt"></i></a>
 							</div>
-							<h3>Global Speakers<span class="subtitle">Laudantium cum dignissimos</span></h3>
+							<h3>Global Speakers<span class="subtitle"></span></h3>
 						</div>
 					</div>
 
@@ -135,7 +192,7 @@ session_start();
 							<div class="fbox-icon">
 								<a href="#"><i class="icon-food2 i-alt"></i></a>
 							</div>
-							<h3>In-between Meals<span class="subtitle">Perferendis accusantium quae</span></h3>
+							<h3>In-between Meals<span class="subtitle"></span></h3>
 						</div>
 					</div>
 
@@ -172,21 +229,24 @@ session_start();
 
 					<div class="subscribe-widget">
 						<div class="widget-subscribe-form-result"></div>
-						<form id="widget-subscribe-form2" action="include/subscribe.php" role="form" method="post" class="nobottommargin">
+						<div class="success d-none" >
+							<p class="alert alert-success"> Thanks for subscribing </p>
+						</div>
+						<form id=" widget-subscribe-form2" role="form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" enctype="multipart/form-data" method="post">
 							<div class="input-group input-group-lg divcenter" style="max-width:600px;">
 								<div class="input-group-prepend">
 									<div class="input-group-text"><i class="icon-email2"></i></div>
 								</div>
-								<input type="email" name="widget-subscribe-form-email" class="form-control required email" placeholder="Enter your Email">
+								<input type="email" id='email' name="widget-subscribe-form-email" class="form-control required email" placeholder="Enter your Email">
 								<div class="input-group-append">
-									<button class="btn btn-secondary" type="submit">Subscribe Now</button>
+									<button class="btn btn-secondary" name="subscribe-form" type="submit">Subscribe Now</button>
 								</div>
+								
 							</div>
+
 						</form>
+
 					</div>
-
-
-
 
 				</div>
 
@@ -278,6 +338,27 @@ session_start();
 			 }
 		});
 	</script>
+<script>
+    $(document).ready(function() {
 
+$('subscribe-form').submit(function(event){
+	var formData={
+		'email': $('#email').val();
+	};
+	$.ajax({
+		type: 'POST',
+		url: form.attr('action'),
+		data: formData,
+		dataType: 'json',
+		encode: true,
+		cache: false,
+		success: function(response){
+			$('#success').show();
+		}
+    });
+	event.preventDefault();
+});
+	});
+</script>
 </body>
 </html>

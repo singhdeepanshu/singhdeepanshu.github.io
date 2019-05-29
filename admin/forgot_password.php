@@ -17,9 +17,10 @@
       	$mysqli_conn->connect();
 
 		if(isset($_POST["emailsubmit"])){
-        	
-
-	        $email=mysqli_real_escape_string($mysqli_conn->conn,$_POST['email']);
+        	include '../phpmailer/src/Exception.php';
+			include '../phpmailer/src/PHPMailer.php';
+			include '../phpmailer/src/SMTP.php';
+			$email=mysqli_real_escape_string($mysqli_conn->conn,$_POST['email']);
 
 			$step="Verify";
 	        // echo '<script>$(".form-registered").fadeOut(300);
@@ -43,11 +44,44 @@
 	                if($result1=$mysqli_conn->get($sql1)){
 	                                
 	                    $to = $email;
-	                    $subject = "Events Admin Panel Security Code";
-	                    $txt = "Please use the following security code for the Events Admin Panel account."."\r\n"."Security Code: ".$str."\r\n"."\r\n"."\r\n"."Thanks"."\r\n"."The Events Team ";
-	                    $headers =  "From: contact@events.com";
+	                  
+	                    $txt = "Please use the following security code for the Events Admin Panel account."."\r\n"."<br>Security Code: ".$str."\r\n"."\r\n"."\r\n"."<br><br>Thanks"."\r\n"."<br>The Spiritual Events Team ";
+	                    
 
-	                    mail($to,$subject,$txt,$headers);
+	                    $mail = new PHPMailer\PHPMailer\PHPMailer();
+				// Passing `true` enables exceptions
+                                                          //Server settings
+			$mail->SMTPDebug = 2;                                 // Enable verbose debug output
+			$mail->isSMTP();                                      // Set mailer to use SMTP
+			$mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
+			$mail->SMTPAuth = true;                               // Enable SMTP authentication
+			$mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+			$mail->Port = 587;                                    // TCP port to connect to
+			//$mail->SMTPAutoTLS = false;
+	
+			$mail->Username = 'skalskaa77@gmail.com';       // SMTP username .. This id should be login into device otherwise authentication failed msg 
+			$mail->Password = 'qwertyuiop987654321';                     // SMTP password
+    
+
+			$mail->setFrom($mail->Username,"Spiritual Events");                                  // Sender mail id and name
+			$mail->addAddress($to);     // Add a recipient email-id and password
+                                                                
+
+			$mail->isHTML(true);                                  // Set email format to HTML
+			$mail->Subject = 'Spiritual Events Admin panel Security Code';
+			$mail->Body    = $txt;
+			$mail->AltBody = 'Reply asap!!!!';
+
+			if(!$mail->send())
+			{
+			http_response_code(500);
+			$data['success']=false;
+			}
+			else{
+				http_response_code(200);
+				$data['success']=true;
+			
+			}
 
 
 	                }
@@ -119,7 +153,7 @@
 <head>
 
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-	<meta name="author" content="SemiColonWeb" />
+	<meta name="author" content="Spiritual Events" />
 
 	<!-- Stylesheets
 	============================================= -->
@@ -130,13 +164,13 @@
 	<link rel="stylesheet" href="../css/font-icons.css" type="text/css" />
 	<link rel="stylesheet" href="../css/animate.css" type="text/css" />
 	<link rel="stylesheet" href="../css/magnific-popup.css" type="text/css" />
-
+	<link rel="shortcut icon" href="../images/favicon.png" />
 	<link rel="stylesheet" href="../css/responsive.css" type="text/css" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 
 	<!-- Document Title
 	============================================= -->
-	<title>Forgot Password - Layout 5 | Canvas</title>
+	<title>Forgot Password - Spiritual Events</title>
 
 </head>
 

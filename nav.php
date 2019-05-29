@@ -13,8 +13,8 @@
       <div class="top-links">
         <ul>
 
-          <li><a href="faqs.html">About Us</a></li>
-          <li><a href="faqs.html">Contact Us</a></li>
+          <li><a href="aboutus.php">About Us</a></li>
+          <li><a href="contactus.php">Contact Us</a></li>
         </ul>
       </div><!-- .top-links end -->
 
@@ -32,8 +32,8 @@
           <li><a href="#" class="si-github"><span class="ts-icon"><i class="icon-github-circled"></i></span><span class="ts-text">Github</span></a></li>
           <li><a href="#" class="si-pinterest"><span class="ts-icon"><i class="icon-pinterest"></i></span><span class="ts-text">Pinterest</span></a></li>
           <li><a href="#" class="si-instagram"><span class="ts-icon"><i class="icon-instagram2"></i></span><span class="ts-text">Instagram</span></a></li>
-          <li><a href="tel:+91.11.85412542" class="si-call"><span class="ts-icon"><i class="icon-call"></i></span><span class="ts-text">+91.11.85412542</span></a></li>
-          <li><a href="mailto:info@canvas.com" class="si-email3"><span class="ts-icon"><i class="icon-email3"></i></span><span class="ts-text">info@canvas.com</span></a></li>
+          <li><a href="tel:+91.11.85412542" class="si-call"><span class="ts-icon"><i class="icon-call"></i></span><span class="ts-text">+91-97-16867756</span></a></li>
+          <li><a href="mailto:info@events.com" class="si-email3"><span class="ts-icon"><i class="icon-email3"></i></span><span class="ts-text">info@events.com</span></a></li>
         </ul>
       </div><!-- #top-social end -->
 
@@ -52,7 +52,7 @@
     <!-- Logo
     ============================================= -->
     <div id="logo">
-      <a href="index.php" class="standard-logo" data-dark-logo="images/logo-dark.png"><img src="images/logo.png" alt="Canvas Logo"></a>
+      <a href="index.php" class="standard-logo" data-dark-logo="images/logo-dark.png"><img src="images/trancendental.jpg" alt="Canvas Logo"></a>
       <a href="index.php" class="retina-logo" data-dark-logo="images/logo-dark@2x.png"><img src="images/logo@2x.png" alt="Canvas Logo"></a>
     </div><!-- #logo end -->
 
@@ -61,7 +61,7 @@
         <i class="i-plain icon-email3 nomargin"></i>
         <div class="he-text">
           Drop an Email
-          <span>info@canvas.com</span>
+          <span>info@events.com</span>
         </div>
       </li>
       <li>
@@ -87,10 +87,10 @@
 
         <ul>
           <li class="current"><a href="index.php"><div>Home</div></a></li>
-          <li><a href="event-category-1.php"><div>Event Type 1</div></a></li>
-          <li><a href="event-category-2.php"><div></div>Event Type 2</a></li>
-          <li ><a href="event-category-3.php"><div>Event Type 3</div></a></li>
-          <li ><a href="event-category-4.php"><div>Event Type 4</div></a></li>
+         <!-- <li><a href="#"><div>Event Type 1</div></a></li>
+          <li><a href="#"><div></div>Event Type 2</a></li>
+          <li ><a href="#"><div>Event Type 3</div></a></li>
+          <li ><a href="#"><div>Event Type 4</div></a></li> -->
           <li><a href="event-calendar.php"><div>Event Calendar</div></a></li>
         </ul>
 

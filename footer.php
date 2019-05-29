@@ -171,7 +171,7 @@
     <div class="container clearfix">
 
       <div class="col_half">
-        Copyrights &copy; 2014 All Rights Reserved by Digdex Labs.<br>
+        Copyrights &copy; 2018 All Rights Reserved by Digdex Labs.<br>
         <div class="copyright-links"><a href="#">Terms of Use</a> / <a href="#">Privacy Policy</a></div>
       </div>
 
@@ -220,12 +220,11 @@
 
         <div class="clear"></div>
 
-        <i class="icon-envelope2"></i> info@canvas.com <span class="middot">&middot;</span> <i class="icon-headphones"></i> +91-11-6541-6369 <span class="middot">&middot;</span> <i class="icon-skype2"></i> CanvasOnSkype
+        <i class="icon-envelope2"></i> info@events.com <span class="middot">&middot;</span> <i class="icon-headphones"></i> +91-97-1686-7756 <span class="middot">&middot;</span> <i class="icon-skype2"></i> eventsOnSkype
       </div>
 
     </div>
 
   </div><!-- #copyrights end -->
-
 
 </footer><!-- #footer end -->
